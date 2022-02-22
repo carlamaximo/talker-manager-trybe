@@ -7,7 +7,7 @@ const read = async (_req, res, next) => {
   try {
     const data = await fs.readFile(FILETALKER, 'utf8');
     return res.status(200).json(JSON.parse(data));
-    } catch(err) {
+    } catch (err) {
       next(err);
     }
 };
