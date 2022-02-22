@@ -12,6 +12,7 @@ const PORT = '3000';
 app.get('/talker', talker.read);
 app.get('/talker/:id', talker.searchById);
 app.post('/login', login.login);
+app.post('/talker', talker.create);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
