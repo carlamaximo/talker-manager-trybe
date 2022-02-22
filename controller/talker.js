@@ -12,6 +12,20 @@ const read = async (_req, res, next) => {
     }
 };
 
+const searchById = async (req, res, _next) => {
+  const data = await fs.readFile(FILETALKER);
+
+  const { id } = req.params;
+
+  const talker = (JSON.parse(data)).find((elem) => elem.id === parseInt(id, 10));
+
+  if (!talker) {
+    return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  }
+
+  return res.status(200).json(talker);
+};
+
 // const create = async (req, res, next) => {
 //   try {
 //     await fs.appendFile(FILETALKER, req.body.talkers);
@@ -21,4 +35,4 @@ const read = async (_req, res, next) => {
 //   }
 // };
 
-module.exports = { read };
+module.exports = { read, searchById };
