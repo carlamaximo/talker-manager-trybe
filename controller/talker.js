@@ -1,5 +1,4 @@
 const fs = require('fs/promises');
-const { validateName, validateAge } = require('./talkerValidations');
 
 const FILETALKER = 'talker.json';
 
@@ -27,22 +26,4 @@ const searchById = async (req, res, _next) => {
   return res.status(200).json(talker);
 };
 
-const create = async (req, res, _next) => {
-  // try {
-  //   await fs.appendFile(FILETALKER, req.body.talkers);
-  //   return res.status(200).end();
-  const { token } = req.header.authorization;
-  const { name, age } = req.body;
-
-  if (!token) {
-    return res.status(401).json({ message: 'Token não encontrado' });
-  }
-  if (token.length !== 16) {
-    return res.status(401).json({ message: 'Token inválido' });
-  }
-  
-  if (validateName(name)) return res.status(400).json(validateName(name));
-  if (validateAge(age)) return res.status(400).json(validateAge(age));
-};
-
-module.exports = { read, searchById, create };
+module.exports = { read, searchById };
