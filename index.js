@@ -20,11 +20,11 @@ app.use(bodyParser.json());
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
 
+app.get('/talker/search', vToken, getTalker);
 app.get('/talker', talker.read);
 app.get('/talker/:id', talker.searchById);
 app.post('/login', login);
 app.post('/talker', vToken, vName, vAge, vTalk, vRate, vWatchedAt, postTalker);
-app.get('/talker/search', vToken, getTalker);
 app.put('/talker/:id', vToken, vName, vAge, vTalk, vRate, vWatchedAt, putTalker);
 // app.delete('/talker/:id', vToken, deleteTalker);
 
