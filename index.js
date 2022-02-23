@@ -25,7 +25,7 @@ app.get('/talker/:id', talker.searchById);
 app.post('/login', login);
 app.post('/talker', vToken, vName, vAge, vTalk, vRate, vWatchedAt, postTalker);
 app.get('/talker/search', vToken, getTalker);
-app.put('/taker/:id', vToken, vName, vAge, vTalk, vRate, vWatchedAt, putTalker);
+app.put('/talker/:id', vToken, vName, vAge, vTalk, vRate, vWatchedAt, putTalker);
 // app.delete('/talker/:id', vToken, deleteTalker);
 
 // não remova esse endpoint, e para o avaliador funcionar

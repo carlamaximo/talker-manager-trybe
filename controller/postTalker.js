@@ -8,7 +8,6 @@ const postTalker = async (req, res) => {
   
   talkersParse.push(newTalker);
   await fs.writeFile('./talker.json', JSON.stringify(talkersParse, null, 2), 'utf-8');
-  console.log('estou e postTalker', talkersParse);
   return res.status(201).json(newTalker);
 };
 
