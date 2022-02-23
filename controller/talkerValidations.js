@@ -1,9 +1,9 @@
 const validateToken = (token) => {
   if (!token) {
-    return { message: 'Token inválido' };
+    return { message: 'Token não encontrado' };
   }
   if (token.length !== 16) {
-    return { message: 'Token não encontrado' };
+    return { message: 'Token inválido' };
   }
   return false;
 };
@@ -29,13 +29,16 @@ const validateAge = (age) => {
   return false;
 };
 
-const validateWatchedAt = (watchedAt, rate) => {
-  const datRegex = /^\d{4}[/-](0?[1-9]|1[012])[/-](0?[1-9]|[12][0-9]|3[01])$/;
-  if (datRegex.test(watchedAt)) {
-    return { message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' };
-  }
-  if (!watchedAt || !rate) {
+const validateWatchedAtAndRate = (watchedAt, rate) => {
+  const datRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+  // console.log(!datRegex.test(watchedAt));
+  
+  if (typeof (watchedAt) === 'undefined' || typeof (rate) === 'undefined') {
+    // console.log('entrei!');
     return { message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' };
+  }
+  if (!datRegex.test(watchedAt)) {
+    return { message: 'O campo "watchedAt" deve ter o formato "dd/mm/aaaa"' };
   }
   return false;
 };
@@ -45,10 +48,20 @@ const validateRate = (rate) => {
   return false;
 };
 
+const validateTalk = (talk) => {
+  if (!talk) {
+    return { message: 'O campo "talk" é obrigatório e "watchedAt" e "rate" não podem ser vazios' };
+  }
+  const { watchedAt, rate } = talk;
+  validateWatchedAtAndRate(watchedAt, rate);
+  validateRate(rate);
+  return false;
+};
+
 module.exports = {
   validateToken,
   validateName,
   validateAge,
-  validateWatchedAt,
-  validateRate,
+  validateTalk,
+  // validateRate,
 };

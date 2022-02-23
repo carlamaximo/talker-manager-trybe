@@ -9,7 +9,7 @@ const login = (req, res, _next) => {
   if (validateEmail(email)) return res.status(400).json(validateEmail(email));
   if (validatePassword(password)) return res.status(400).json(validatePassword(password));
   
-  return res.status(200).json({ token });
+  return res.status(200).send({ token });
 };
 
 module.exports = { login };
