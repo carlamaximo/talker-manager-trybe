@@ -10,6 +10,8 @@ const { vTalk } = require('./middleware/validateTalker');
 const { vRate } = require('./middleware/validateRate');
 const { vWatchedAt } = require('./middleware/validateWatched');
 const { postTalker } = require('./controller/postTalker');
+// const putTalker = require('./controller/putTalker');
+const { getTalker } = require('./controller/getTalker');
 
 const app = express();
 app.use(bodyParser.json());
@@ -21,6 +23,8 @@ app.get('/talker', talker.read);
 app.get('/talker/:id', talker.searchById);
 app.post('/login', login.login);
 app.post('/talker', vToken, vName, vAge, vTalk, vRate, vWatchedAt, postTalker);
+// app.put('/taker/:id', vToken, vName, vAge, vTalk, vRate, vWatchedAt, putTalker);
+app.get('/talker/search', login.login, vToken, getTalker);
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
