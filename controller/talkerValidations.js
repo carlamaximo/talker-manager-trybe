@@ -1,8 +1,8 @@
-const validateToken = (token) => {
-  if (!token) {
+const validateToken = (authorization) => {
+  if (!authorization) {
     return { message: 'Token não encontrado' };
   }
-  if (token.length !== 16) {
+  if (authorization.length !== 16) {
     return { message: 'Token inválido' };
   }
   return false;

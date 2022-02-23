@@ -1,9 +1,10 @@
 const { validateToken } = require('../controller/talkerValidations');
 
 const vToken = (req, res, next) => {
-  const { authorization: token } = req.headers;
-  const { message } = validateToken(token);
+  const { authorization } = req.headers;
+  const { message } = validateToken(authorization);
   if (message) return res.status(401).json({ message });
+
   next();
 };
 

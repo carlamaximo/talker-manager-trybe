@@ -8,9 +8,10 @@ const getTalker = (req, res) => {
 
   if (!q) return res.status(200).json([]);
 
-  const filter = talkers.filter((elem) => elem.contains(q));
-
-  return res.status(200).json({ filter });
+  if (q) {
+    const filter = talkers.filter((elem) => elem.name.includes(q));
+    return res.status(200).send(filter);
+  }
 };
 
 module.exports = { getTalker };
